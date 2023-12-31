@@ -22,7 +22,7 @@ def evaluate(check: int, against: int) -> tuple[str, bool]:
         return (f"That's it! The generated number was {against}!", True)
 
 
-def get_input(_msg: str) -> int:
+def get_input(_: str) -> int:
     """
     Prompt the user for input and ensure the input is a valid integer.
 
@@ -35,10 +35,12 @@ def get_input(_msg: str) -> int:
     Raises:
     ValueError: If the user enters a non-integer value.
     """
-    num = input(_msg)
+    num = input(_)
 
-    while (not num.isdecimal()):
-        num = input("I can only accept whole numbers. Try again")
+    try:
+        int(num)
+    except ValueError:
+        return False
 
     return int(num)
 
@@ -61,6 +63,9 @@ def main():
 
     user_input = get_input(
         "The computer has generated a random number from 1-100. Try guessing it!\n")
+
+    while (user_input == False):
+        user_input = get_input("")
 
     result = evaluate(user_input, computer_number)
     print(result[0])
