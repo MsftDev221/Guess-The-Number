@@ -22,6 +22,23 @@ def main():
 
     user_input = int(user_input)
 
+    result = evaluate(user_input, computer_number)
+    print(result[0])
+
+    while (result[1] == False):
+        user_input = input()
+
+        while (not user_input.isdecimal()):
+            user_input = input(
+                "The computer has generated a random number. Try guessing it!\n")
+
+        user_input = int(user_input)
+
+        result = evaluate(user_input, computer_number)
+        print(result[0])
+
+    return 0
+
 
 if __name__ == "__main__":
     main()
