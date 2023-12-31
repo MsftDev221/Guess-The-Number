@@ -10,29 +10,26 @@ def evaluate(check: int, against: int) -> tuple[str, bool]:
         return (f"That's it! The generated number was {against}!", True)
 
 
+def get_input(_msg: str) -> int:
+    num = input(_msg)
+
+    while (not num.isdecimal()):
+        num = input("I can only accept whole numbers. Try again")
+
+    return int(num)
+
+
 def main():
     computer_number: int = random.randint(1, 100)
 
-    user_input = input(
-        "The computer has generated a random number. Try guessing it!\n")
-
-    while (not user_input.isdecimal()):
-        user_input = input(
-            "The computer has generated a random number. Try guessing it!\n")
-
-    user_input = int(user_input)
+    user_input = get_input(
+        "The computer has generated a random number from 1-100. Try guessing it!\n")
 
     result = evaluate(user_input, computer_number)
     print(result[0])
 
     while (result[1] == False):
-        user_input = input()
-
-        while (not user_input.isdecimal()):
-            user_input = input(
-                "The computer has generated a random number. Try guessing it!\n")
-
-        user_input = int(user_input)
+        user_input = get_input("")
 
         result = evaluate(user_input, computer_number)
         print(result[0])
